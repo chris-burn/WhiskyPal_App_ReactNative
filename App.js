@@ -1,4 +1,6 @@
 import React from 'react';
+import Realm from './components/realm.js';
+// import Styles from './components/styles';
 import { AppRegistry, StyleSheet, Text, View, Button, Image } from 'react-native';
 import { StackNavigator } from 'react-navigation';
 import {TabNavigator} from 'react-navigation';
@@ -17,6 +19,10 @@ class SplashScreen extends React.Component {
      <Text></Text>
      <Text>Welcome to ScotWhiskyPal!</Text>
      <Button
+     onPress={() => navigate('Whiskies', {user: 'Chris'})}
+     title="View Whiskies"
+     />
+     <Button
      onPress={() => navigate('Collection', {user: 'Chris'})}
      title="My Collection"
      />
@@ -30,6 +36,21 @@ class SplashScreen extends React.Component {
      />
      </View>
      );
+  }
+}
+
+class WhiskiesScreen extends React.Component {
+  static navigationOptions = {
+    title: 'View Whiskies',
+  };
+  render() {
+    // The screen's current route is passed in to `props.navigation.state`
+    const { params } = this.props.navigation.state;
+    return (
+      <View style={styles.container}>
+        <Text>List of Whiskies</Text>
+      </View>
+    );
   }
 }
 
@@ -134,6 +155,7 @@ TasteWishNavigator.navigationOptions = {
 // stack nav controller
 const WhiskyPal = StackNavigator({
   Splash: { screen: SplashScreen },
+  Whiskies: { screen: WhiskiesScreen },
   Collection: {screen: CollectionScreen },
   Distilleries: {screen: DistilleriesScreen },
   TasteWish: {screen: TasteWishNavigator },
